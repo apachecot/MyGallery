@@ -1,0 +1,3 @@
+### ERRORS
+form.error.unique.email: 'Ya existe un usuario con el mismo email'
+form.error.unique.username: 'Ya existe un usuario con el mismo nombre'

@@ -1,0 +1,81 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block page_title %}{{ 'admin.profile.title'|trans }}{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>{{ 'admin.images.title'|trans }}</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="row">
+                        {{ form_start(form, {'action': path('admin_images_create'), 'method': 'POST', 'attr': {'class': 'form-horizontal form-label-left'}}) }}
+                        <h1>{{ 'login.create.title'|trans }}</h1>
+                        <div class="item form-group {% if form_errors(form.imageFile) %} bad{% endif %}">
+                            <label class="control-label" for="first-name">
+                                {{ 'admin.images.image.label'|trans }}
+                            </label>
+                            {{ form_widget(form.imageFile, {'attr': {'class': 'form-control'}}) }}
+                            <div class="alert">{{ form_errors(form.imageFile) }}</div>
+                        </div>
+                        <div class="item form-group {% if form_errors(form.category) %} bad{% endif %}">
+                            <label class="control-label" for="first-name">
+                                {{ 'admin.images.category.label'|trans }}
+                            </label>
+                            {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
+                            <div class="alert">{{ form_errors(form.category) }}</div>
+                        </div>
+                        <div class="item form-group {% if form_errors(form.description) %} bad{% endif %}">
+                            <label class="control-label" for="first-name">
+                                {{ 'admin.images.description.label'|trans }}
+                            </label>
+                            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                            <div class="alert">{{ form_errors(form.description) }}</div>
+                        </div>
+                        <div  class="item form-group {% if form_errors(form.private) %} bad{% endif %}">
+                            <label class="control-label" for="first-name">
+                                {{ 'admin.images.private.label'|trans }}
+                            </label>
+                            {{ form_widget(form.private, {'attr': {'class': 'form-control'}}) }}
+                            <div class="alert">{{ form_errors(form.private) }}</div>
+                        </div>
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <a href="{{ path('admin_home') }}" class="btn btn-primary" type="button">Cancel</a>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <!-- morris.js -->
+    <script src="{{ asset('assets/vendors/raphael/raphael.min.js') }}"></script>
+    <script src="{{ asset('assets/vendors/morris.js/morris.min.js') }}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{{ asset('assets/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{{ asset('assets/js/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/js/datepicker/daterangepicker.js') }}"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="{{ asset('assets/js/custom.min.js') }}"></script>
+
+{% endblock %}

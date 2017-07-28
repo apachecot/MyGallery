@@ -1,0 +1,142 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block page_title %}{{ 'admin.profile.title'|trans }}{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>{{ 'admin.profile.user.title'|trans({'%username%': app.user.username }) }}
+                        <small>{{ 'admin.profile.detail.title'|trans }}</small>
+                    </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+
+                        <div class="profile_img">
+
+                            <!-- end of image cropping -->
+                            <div id="crop-avatar">
+                                <!-- Current avatar -->
+                                <img class="img-responsive avatar-view"
+                                     src="{{ vich_uploader_asset(app.user, 'imageFile')|default(asset('assets/images/user.png')) }}"
+                                     alt="Avatar" title="Change the avatar">
+
+                                <!-- Loading state -->
+                                <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
+                            </div>
+                            <!-- end of image cropping -->
+
+                        </div>
+                        <h3>{{ app.user.username }}</h3>
+
+                        <ul class="list-unstyled user_data">
+                            <li><i class="fa fa-user user-profile-icon"></i> {{ app.user.name }} {{ app.user.surname }}
+                            </li>
+
+                            <li>
+                                <i class="fa fa-calendar user-profile-icon"></i>
+                                {{ 'admin.profile.createdAt'|trans }} {{ app.user.createdAt|default('') }}
+                            </li>
+
+                            <li class="m-top-xs">
+                                <i class="fa fa-external-link user-profile-icon"></i>
+                                <a href="{{ app.user.url|default('#') }}" target="_blank">{{ app.user.url|default('admin.profile.no.url'|trans) }}</a>
+                            </li>
+                        </ul>
+                        <br/>
+                    </div>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_content">
+                                <div class="row">
+                                    {{ form_start(form, {'action': path('admin_profile_edit'), 'method': 'POST', 'attr': {'class': 'form-horizontal form-label-left'}}) }}
+                                    <h1>{{ 'login.create.title'|trans }}</h1>
+                                    <div class="item form-group {% if form_errors(form.imageFile) %} bad{% endif %}">
+                                        <label class="control-label" for="first-name">
+                                            {{ 'admin.profile.image.label'|trans }}
+                                        </label>
+                                        {{ form_widget(form.imageFile, {'attr': {'class': 'form-control'}}) }}
+                                        <div class="alert">{{ form_errors(form.imageFile) }}</div>
+                                    </div>
+                                    <div class="item form-group {% if form_errors(form.name) %} bad{% endif %}">
+                                        <label class="control-label" for="first-name">
+                                            {{ 'admin.profile.name.label'|trans }}
+                                        </label>
+                                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                                        <div class="alert">{{ form_errors(form.name) }}</div>
+                                    </div>
+                                    <div  class="item form-group {% if form_errors(form.surname) %} bad{% endif %}">
+                                        <label class="control-label" for="first-name">
+                                            {{ 'admin.profile.surname.label'|trans }}
+                                        </label>
+                                        {{ form_widget(form.surname, {'attr': {'class': 'form-control'}}) }}
+                                        <div class="alert">{{ form_errors(form.surname) }}</div>
+                                    </div>
+                                    <div  class="item form-group {% if form_errors(form.username) %} bad{% endif %}">
+                                        <label class="control-label" for="first-name">
+                                            {{ 'admin.profile.username.label'|trans }}
+                                        </label>
+                                        {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+                                        <div class="alert">{{ form_errors(form.username) }}</div>
+                                    </div>
+                                    <div  class="item form-group {% if form_errors(form.email) %} bad{% endif %}">
+                                        <label class="control-label" for="first-name">
+                                            {{ 'admin.profile.email.label'|trans }}
+                                        </label>
+                                        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                                        <div class="alert">{{ form_errors(form.email) }}</div>
+                                    </div>
+                                    <div class="item form-group {% if form_errors(form.url) %} bad{% endif %}">
+                                        <label class="control-label" for="first-name">
+                                            {{ 'admin.profile.url.label'|trans }}
+                                        </label>
+                                        {{ form_widget(form.url, {'attr': {'class': 'form-control'}}) }}
+                                        <div class="alert">{{ form_errors(form.url) }}</div>
+                                    </div>
+
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                            <a href="{{ path('admin_profile') }}" class="btn btn-primary" type="button">Cancel</a>
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                        </div>
+                                    </div>
+                                    {{ form_end(form) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <!-- morris.js -->
+    <script src="{{ asset('assets/vendors/raphael/raphael.min.js') }}"></script>
+    <script src="{{ asset('assets/vendors/morris.js/morris.min.js') }}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{{ asset('assets/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{{ asset('assets/js/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/js/datepicker/daterangepicker.js') }}"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="{{ asset('assets/js/custom.min.js') }}"></script>
+
+
+
+{% endblock %}
