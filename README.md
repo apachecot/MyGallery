@@ -1,7 +1,6 @@
 # MyGallery
 
-MyGallery is a symfony project that started to practice good practices.
-The project is under development, so the functionality is very limited.
+Symfony project created to practice with framework's good practices. Currently under development.
 
 Requirements
 ------------
